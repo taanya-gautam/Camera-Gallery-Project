@@ -16,34 +16,34 @@ let constraints = {
 // madiaDevices --> web API->The MediaDevices interface provides access to connected media input devices like cameras and microphones, as well as screen sharing. In essence, it lets you obtain access to any hardware source of media data.
 
 
- navigator.mediaDevices.getUserMedia(constraints)
- .then((stream) => {
-     video.srcObject = stream;
+//  navigator.mediaDevices.getUserMedia(constraints)
+//  .then((stream) => {
+//      video.srcObject = stream;
 
-     recorder = new MediaRecorder(stream);
+//      recorder = new MediaRecorder(stream);
 
-     recorder.addEventListener("start" ,(e) => {
-        chunks = [];
-     })
-     recorder.addEventListener("dataavailable" ,(e) => {
-        chunks.push(e.data)
-     })
-     recorder.addEventListener("stop" ,(e) => {
-    //     // conversion of media chunks data into videos
-    //     //The Blob object represents a blob, which is a file-like object of immutable, raw data; they can be read as text or binary data, or converted into a ReadableStream so its methods can be used for processing the data.
-        let blob = new Blob( chunks ,{type : "video/mp4"});
-        let videoURL = URL.createObjectURL(blob);
+//      recorder.addEventListener("start" ,(e) => {
+//         chunks = [];
+//      })
+//      recorder.addEventListener("dataavailable" ,(e) => {
+//         chunks.push(e.data)
+//      })
+//      recorder.addEventListener("stop" ,(e) => {
+//     //     // conversion of media chunks data into videos
+//     //     //The Blob object represents a blob, which is a file-like object of immutable, raw data; they can be read as text or binary data, or converted into a ReadableStream so its methods can be used for processing the data.
+//         let blob = new Blob( chunks ,{type : "video/mp4"});
+//         let videoURL = URL.createObjectURL(blob);
 
-        let a = document.createElement("a");
-        a.href = videoURL;
-        a.download = "stream.mp4";
-        a.click();
+//         let a = document.createElement("a");
+//         a.href = videoURL;
+//         a.download = "stream.mp4";
+//         a.click();
 
 
 
-     })
+   //  })
 
-})
+//})
 
  recordBtnCont.addEventListener("click" ,(e) => {
     if (!recorder) return;
@@ -60,6 +60,28 @@ let constraints = {
         recordBtn.classList.remove("scale-record");
         stopTimer();
     }
+
+ })
+ capturedBtnCont.addEventListener("click" , (e) => {
+    //The Canvas API provides a means for drawing graphics via JavaScript and the HTML <canvas> element. Among other things, it can be used for animation,
+    // game graphics, data visualization, photo manipulation, and real-time video processing.
+    let canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    //The Document.getElementById() method gets a reference to the HTML <canvas> element. Next, 
+    //the HTMLCanvasElement.getContext() method gets that element's context—the thing onto which the drawing will be rendered.
+
+    let tool = canvas.getContext("2d");
+    tool.drawImage( video ,0 ,0 , canvas.width , canvas.height);
+     let imageURL = canvas.toDataURL();         // to get URL of picture
+     let a = document.createElement("a");
+        a.href = imageURL;
+        a.download = "image.jpg";
+        a.click();
+
+
+
+
 
  })
 let timerID;
