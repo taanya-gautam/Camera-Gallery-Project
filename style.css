@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 .video-cont {
-    height: 100%;
+    height: 100vh;
     width: 100vw;
     background-color: black;
     
@@ -27,6 +27,7 @@ video {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 2;
 }
 .action-cont > * {
     width: 100%;
@@ -98,6 +99,7 @@ video {
     height: 16rem;
     width: 5rem;
     background-color: aqua;
+    z-index: 2;
 }
 .filter {
     height: 4rem;
@@ -108,7 +110,7 @@ video {
     background-blend-mode: color-burn;
 }
 .orange {
-    background-color: #ffa5004d;
+    background-color: hwb(39 0% 0% / 0.302);
 
 }
 .brown {
@@ -120,3 +122,23 @@ video {
 .transparent {
     background-color: transparent;
 }
+.filter-layer {
+    position:absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+   /* background-color:#a52a2a3b ;*/
+    z-index: 1;
+}
+
+/*The z-index property specifies the stack order of an element.
+
+An element with greater stack order is always in front of an element with a lower stack order.
+
+Note: z-index only works on positioned elements (position: absolute, position: relative, position: fixed, or position: sticky) and flex items (elements that are direct children of display:flex elements).
+
+Note: If two positioned elements overlap without a z-index specified, the element positioned last in the HTML code will be shown on top. 
+
+
+*/
