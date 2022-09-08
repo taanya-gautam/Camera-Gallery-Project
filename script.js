@@ -34,12 +34,23 @@ let constraints = {
     //     // conversion of media chunks data into videos
     //     //The Blob object represents a blob, which is a file-like object of immutable, raw data; they can be read as text or binary data, or converted into a ReadableStream so its methods can be used for processing the data.
         let blob = new Blob( chunks ,{type : "video/mp4"});
-        let videoURL = URL.createObjectURL(blob);
 
-        let a = document.createElement("a");
-         a.href = videoURL;
-         a.download = "stream.mp4";
-        a.click();
+        if (db) {
+            let videoID = shortid();
+            let dbTransaction = db.transaction("video" , "readwrite");
+           let videoStore =  dbTransaction.objectStore("video");
+           let videoEntry = {
+            id : `vid-${videoID}`,
+            blobData : blob
+           }
+           videoStore.add(videoEntry);
+        }
+       // let videoURL = URL.createObjectURL(blob);
+
+        // let a = document.createElement("a");
+        //  a.href = videoURL;
+        //  a.download = "stream.mp4";
+        // a.click();
 
 
 
@@ -79,12 +90,24 @@ let constraints = {
     //filtering
     tool.fillStyle = transparentColor;
     tool.fillRect(0 , 0 , canvas.width , canvas.height);
-    
-     let imageURL = canvas.toDataURL();         // to get URL of picture
-     let a = document.createElement("a");
-        a.href = imageURL;
-        a.download = "image.jpg";
-        a.click();
+
+     let imageURL = canvas.toDataURL(); 
+
+             // to get URL of picture
+    //  let a = document.createElement("a");
+    //     a.href = imageURL;
+    //     a.download = "image.jpg";
+    //     a.click();
+    if (db) {
+        let imageID = shortid();
+        let dbTransaction = db.transaction("image" , "readwrite");
+       let imageStore =  dbTransaction.objectStore("image");
+       let imageEntry = {
+        id : `img-${imageID}`,
+        url : imageURL
+       }
+       imageStore.add(imageEntry);
+    }
 
  })
 let timerID;
