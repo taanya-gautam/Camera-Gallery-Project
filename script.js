@@ -76,6 +76,7 @@ let constraints = {
 
  })
  capturedBtnCont.addEventListener("click" , (e) => {
+    captureBtn.classList.add("scale-capture");
     //The Canvas API provides a means for drawing graphics via JavaScript and the HTML <canvas> element. Among other things, it can be used for animation,
     // game graphics, data visualization, photo manipulation, and real-time video processing.
     let canvas = document.createElement("canvas");
@@ -108,6 +109,9 @@ let constraints = {
        }
        imageStore.add(imageEntry);
     }
+    setTimeout(() => {
+        captureBtn.classList.remove("scale-capture")
+    }, 500);
 
  })
 let timerID;

@@ -142,3 +142,18 @@ Note: If two positioned elements overlap without a z-index specified, the elemen
 
 
 */
+.material-icons {
+    color: white;
+    font-size: 3rem;
+
+}
+.gallery {
+    position: absolute;
+    
+    right: 6rem;
+    bottom: 8rem;
+    z-index: 2;
+}
+.gallery:hover {
+    cursor: pointer;
+}
